@@ -3,9 +3,8 @@ import 'package:news/core/routes.dart';
 import 'package:news/core/theme.dart';
 
 class HomeDrawer extends StatelessWidget {
-  const HomeDrawer({
-    super.key,
-  });
+  final VoidCallback ontap;
+  const HomeDrawer({super.key, required this.ontap});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +26,8 @@ class HomeDrawer extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () {
-              Navigator.pushReplacementNamed(context, Routes.homeView);
+              ontap();
+              Navigator.pop(context);
             },
             child: Padding(
               padding: const EdgeInsets.all(16.0),

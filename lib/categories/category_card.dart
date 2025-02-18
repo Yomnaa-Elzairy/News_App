@@ -5,8 +5,9 @@ import 'package:news/core/theme.dart';
 class CategoryCard extends StatelessWidget {
   final String imageName;
   final bool isEven;
+  final Function onCategorySelected;
   const CategoryCard(
-      {super.key, required this.imageName, required this.isEven});
+      {super.key, required this.imageName, required this.isEven,required this.onCategorySelected});
 
   @override
   Widget build(BuildContext context) {
@@ -41,33 +42,21 @@ class CategoryCard extends StatelessWidget {
                         "View all",
                         style: Theme.of(context).textTheme.headlineSmall,
                       ),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.pushNamed(context, Routes.categoryView,
-                              arguments: imageName);
-                        },
-                        child: Container(
-                          height: MediaQuery.sizeOf(context).height * 0.08,
-                          width: MediaQuery.sizeOf(context).width * 0.18,
-                          decoration: BoxDecoration(
-                              color: Apptheme.white, shape: BoxShape.circle),
-                          child: Icon(Icons.arrow_forward_ios),
-                        ),
+                      Container(
+                        height: MediaQuery.sizeOf(context).height * 0.08,
+                        width: MediaQuery.sizeOf(context).width * 0.18,
+                        decoration: BoxDecoration(
+                            color: Apptheme.white, shape: BoxShape.circle),
+                        child: Icon(Icons.arrow_forward_ios),
                       ),
                     ]
                   : [
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.pushNamed(context, Routes.categoryView,
-                              arguments: imageName);
-                        },
-                        child: Container(
-                          height: MediaQuery.sizeOf(context).height * 0.08,
-                          width: MediaQuery.sizeOf(context).width * 0.18,
-                          decoration: BoxDecoration(
-                              color: Apptheme.white, shape: BoxShape.circle),
-                          child: Icon(Icons.arrow_back_ios),
-                        ),
+                      Container(
+                        height: MediaQuery.sizeOf(context).height * 0.08,
+                        width: MediaQuery.sizeOf(context).width * 0.18,
+                        decoration: BoxDecoration(
+                            color: Apptheme.white, shape: BoxShape.circle),
+                        child: Icon(Icons.arrow_back_ios),
                       ),
                       Text(
                         "View all",

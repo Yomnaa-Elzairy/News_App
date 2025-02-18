@@ -1,32 +1,19 @@
-import 'package:flutter/material.dart';
-import 'package:news/widgets/category_card.dart';
-import 'package:news/widgets/home_drawer.dart';
+import 'dart:ffi';
 
-class HomeView extends StatelessWidget {
+import 'package:flutter/material.dart';
+import 'package:news/categories/category_card.dart';
+import 'package:news/models/category_model.dart';
+
+// ignore: must_be_immutable
+class CategoryView extends StatelessWidget {
   static String widgetName = "Home View";
-  const HomeView({super.key});
+  void Function(CategoryModel) onCategorySelected;
+  CategoryView({super.key, required this.onCategorySelected});
 
   @override
   Widget build(BuildContext context) {
     TextTheme textTheme = Theme.of(context).textTheme;
-    List<String> images = [
-      "general",
-      "business",
-      "sports",
-      "technology",
-      "science",
-      "health",
-      "entertainment"
-    ];
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "Home",
-          style: textTheme.headlineSmall,
-        ),
-        actions: [IconButton(onPressed: () {}, icon: Icon(Icons.search))],
-      ),
-      drawer: HomeDrawer(),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: SingleChildScrollView(
@@ -47,14 +34,20 @@ class HomeView extends StatelessWidget {
               ListView.separated(
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
-                  itemBuilder: (_, index) => CategoryCard(
-                        imageName: images[index],
-                        isEven: index.isEven ? true : false,
+                  itemBuilder: (_, index) => InkWell(
+                        onTap: () {
+                          onCategorySelected(CategoryModel.categories[index]);
+                        },
+                        child: CategoryCard(
+                          imageName: CategoryModel.categories[index].image,
+                          isEven: index.isEven ? true : false,
+                          onCategorySelected: onCategorySelected,
+                        ),
                       ),
                   separatorBuilder: (_, index) => SizedBox(
                         height: 20,
                       ),
-                  itemCount: images.length)
+                  itemCount: CategoryModel.categories.length)
             ],
           ),
         ),
