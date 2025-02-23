@@ -1,24 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:news/core/theme.dart';
+import 'package:news/models/News/articles.dart';
+import 'package:news/models/News/news_articles.dart';
 import 'package:news/news/news_details.dart';
 
 class NewsCard extends StatelessWidget {
-  const NewsCard({
-    super.key,
-  });
-
-
+  Articles news;
+  NewsCard({super.key, required this.news});
 
   @override
   Widget build(BuildContext context) {
     TextTheme textTheme = Theme.of(context).textTheme;
     return GestureDetector(
-       onTap: () {
-                showModalBottomSheet(
-                    backgroundColor: Apptheme.black,
-                    context: context,
-                    builder: (_) => NewsDetails());
-              },
+      onTap: () {
+        showModalBottomSheet(
+            backgroundColor: Apptheme.black,
+            context: context,
+            builder: (_) => NewsDetails());
+      },
       child: Container(
         padding: EdgeInsets.all(8),
         decoration: BoxDecoration(
@@ -26,14 +25,16 @@ class NewsCard extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Image.asset(
-              "assets/images/image.png",
+            Image.network(
+              errorBuilder: (context, error, stackTrace) => Text("No image"),
+              news.urlToImage ??
+                  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNNLEL-qmmLeFR1nxJuepFOgPYfnwHR56vcw&s",
             ),
             SizedBox(
               height: 10,
             ),
             Text(
-              "40-year-old man falls 200 feet to his death while canyoneering at national park",
+              news.title!,
               style: textTheme.titleMedium,
             ),
             SizedBox(
@@ -44,7 +45,7 @@ class NewsCard extends StatelessWidget {
               children: [
                 Expanded(
                   child: Text(
-                    "By : DANIEL NIEMANN Associated Press, MIKE CORDER Associated Press",
+                    "by: ${news.author ?? " "}",
                     style:
                         textTheme.bodySmall!.copyWith(color: Color(0xffA0A0A0)),
                     overflow: TextOverflow.clip,
@@ -53,7 +54,7 @@ class NewsCard extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(top: 30.0),
                   child: Text(
-                    "15 minutes ago",
+                    news.publishedAt!,
                     style:
                         textTheme.bodySmall!.copyWith(color: Color(0xffA0A0A0)),
                     overflow: TextOverflow.clip,

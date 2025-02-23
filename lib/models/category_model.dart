@@ -6,13 +6,38 @@ class CategoryModel {
   final String image;
 
   CategoryModel({required this.id, required this.name, required this.image});
- static List<CategoryModel> categories = [
-    CategoryModel(id: "1", name: "General", image: "general",),
-    CategoryModel(id: "2", name: "businnes", image:       "business",),
-    CategoryModel(id: "3", name: "sports", image:       "sports",),
-    CategoryModel(id: "4", name: "technology", image:       "technology",),
-    CategoryModel(id: "5", name: "science", image:       "science",),
-    CategoryModel(id: "6", name: "health", image:       "health",),
-    CategoryModel(id: "7", name: "entertainment", image:       "entertainment"),
+  static List<CategoryModel> categories = [
+    CategoryModel(
+      id: "general",
+      name: "General",
+      image: "general",
+    ),
+    CategoryModel(
+      id: "business",
+      name: "Business",
+      image: "business",
+    ),
+    CategoryModel(
+      id: "sports",
+      name: "Sports",
+      image: "sports",
+    ),
+    CategoryModel(
+      id: "technology",
+      name: "Technology",
+      image: "technology",
+    ),
+    CategoryModel(
+      id: "science",
+      name: "Science",
+      image: "science",
+    ),
+    CategoryModel(
+      id: "health",
+      name: "Health",
+      image: "health",
+    ),
+    CategoryModel(
+        id: "entertainment", name: "Entertainment", image: "entertainment"),
   ];
 }
